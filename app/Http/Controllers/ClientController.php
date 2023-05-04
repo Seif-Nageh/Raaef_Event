@@ -14,7 +14,7 @@ class ClientController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'phone' => 'required|unique:clients,phone',
-            'email' => 'max:255|email',
+            'email' => 'max:255',
             'city' => 'max:100',
             'state' => 'max:100',
         ];
