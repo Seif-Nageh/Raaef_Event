@@ -52,7 +52,34 @@
                     <x-input-error :messages="$errors->get('state')" class="mt-2" />
             </div>
         </div>
-        <x-primary-button class="px-10 py-4 mt-2">
+
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3  mt-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="e-mail">
+                    E-mail
+                </label>
+                {{-- <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="email" value="{{ old('email') }}"
+                    id="e-mail" type="text" placeholder="name@example.com"> --}}
+
+                    <x-dropdown align="right" width="w-full">
+                    <x-slot name="trigger">
+                        open
+                    </x-slot>
+
+                    <x-slot name="content">
+                        open
+
+                    </x-slot>
+                </x-dropdown>
+
+
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+        </div>
+
+
+        <x-primary-button class="px-10 py-4 mt-2" type='submit'>
             {{ __('submit') }}
         </x-primary-button>
     </form>

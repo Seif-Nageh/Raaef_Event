@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
+        'branch'
     ];
 
     /**
@@ -41,4 +43,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class, 'add_by');
+    }
+
+
+    // return $this->hasMany(Comment::class, 'foreign_key');
+
+    // return $this->hasMany(Comment::class, 'foreign_key', 'local_key');
 }
