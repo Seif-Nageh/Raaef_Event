@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function clients()
     {
-        return $this->hasMany(Client::class, "email");
+        return $this->hasMany(Client::class, 'add_by');
     }
 
 

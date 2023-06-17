@@ -13,13 +13,7 @@ class ClientController extends Controller
 {
     function store(Request $request)
     {
-        // $rules = [
-        //     'name' => 'required|max:255',
-        //     'phone' => 'required|unique:clients,phone',
-        //     'email' => 'max:255',
-        //     'city' => 'max:100',
-        //     'state' => 'max:100',
-        // ];
+
 
 
         //validation
@@ -33,64 +27,17 @@ class ClientController extends Controller
 
         // dd($request);
         $user = $request->user();
-
-        // $validator = Validator::make($request->all(), $rules);
-        // dd($validator);
-
-        // create the client
-        // return $request->user()->create($request->only([
-        //     'name',
-        //     'phone',
-        //     'email',
-        //     'city',
-        //     'state'
-        // ]));
-
-        $user->clients()->create($request->only([
+        $client = $user->clients()->create($request->only([
             'name',
             'phone',
             'email',
             'city',
-            'state'
+            'state',
+            // 'add_by' => $user->id
         ]));
 
-        return $user;
-
-        // return $request->user()->updateOrCreate($request);
-
-        // dd($request);
-
-        // if ($validator->fails()) {
-        //     return back()
-        //         ->withInput()
-        //         ->withErrors($validator);
-        // } else {
-        // dd($validator);
-
-        // $data = $request->input();
-        // $client = new Client;
-
-        // $client->name = $data['name'];
-        // $client->phone = $data['phone'];
-        // $client->city = $data['city'];
-        // $client->email = $data['email'];
-        // $client->state = $data['state'];
-
-        // return $user = $request->all;
-        // dd($user);
-
-        // $request->user()->clients()->create();
-
-        // return $user = Client::find(1);
-        // dd($user);
 
 
-
-
-
-
-
-        // $client->add_by = $data['state'];
 
 
         return redirect('/qr');

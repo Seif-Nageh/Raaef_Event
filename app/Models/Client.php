@@ -20,6 +20,7 @@ class Client extends Model
         'category',
         'type',
         'company_name',
+
     ];
 
 
@@ -27,18 +28,4 @@ class Client extends Model
     {
         return $this->belongsTo(User::class, 'add_by');
     }
-
-    // public function user(): BelongsTo
-    // {
-    //     return $this->belongsTo(User::class, 'foreign_key');
-    // }
-
-
-
-    // If the parent model does not use id as its primary key, or you wish to find the associated model using a different column, you may pass a third argument to the belongsTo method specifying the parent table's custom key:
-
-    // public function user(): BelongsTo
-    // {
-    //     return $this->belongsTo(User::class, 'foreign_key', 'owner_key');
-    // }
 }
