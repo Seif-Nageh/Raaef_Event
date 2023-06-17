@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::table('clients', function (Blueprint $table) {
             $table->string("second_phone")->nullable();
             $table->string("address")->nullable();
-            $table->integer("category")->default(0);
-            $table->integer("type")->default(0);
+            $table->string("category");
+            $table->string("type");
             $table->string("company_name")->nullable();
             $table->foreignId("add_by")->constrained("users");
         });
