@@ -46,12 +46,6 @@ class ClientController extends Controller
             'company_name',
 
         ]));
-
-
-
-
-
-
         return redirect('/qr');
     }
 

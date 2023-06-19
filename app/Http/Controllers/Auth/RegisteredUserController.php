@@ -32,14 +32,16 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'type' => ['required'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'type' => $request->type
         ]);
 
         event(new Registered($user));
@@ -48,4 +50,15 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+
+    // public function isAdmin($value)
+    // {
+    //     if ($value === 0) {
+
+    //         return redirect(RouteServiceProvider::HOME);
+    //     } else {
+    //         return redirect('/');
+    //     }
+    // }
 }
