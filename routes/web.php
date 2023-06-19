@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', function () {
-            return view('dashboard');
+            $clients = Client::all();
+            return view('dashboard', compact('clients'));
         })->name('dashboard');
     });
 
