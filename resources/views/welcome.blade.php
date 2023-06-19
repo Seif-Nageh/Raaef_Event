@@ -147,7 +147,7 @@
         </div>
 
 
-        <x-primary-button class="px-12 py-4 mt-2" type='submit'>
+        <x-primary-button class="px-20 text-lg py-4 mt-2" type='submit'>
             {{ __('حفظ') }}
         </x-primary-button>
     </form>

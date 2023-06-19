@@ -48,13 +48,15 @@
 
                 <!-- Select type of user -->
                 <div class="mt-4">
-                    <label for="type" class="block uppercase tracking-wide text-xs font-bold">Type</label>
+                    <x-input-label for="type" :value="__('Select User Type')" />
+
+
                     <select id="type"
                         class="block mt-1 w-full border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         name="type">
-                        <option selected disabled></option>
-                        <option value="0">Admin</option>
-                        <option value="1">Guest</option>
+                        <option disabled> Select User Type</option>
+                        <option value="1">Admin</option>
+                        <option selected value="0">User</option>
                     </select>
 
                     <x-input-error :messages="$errors->get('type')" class="mt-2" />

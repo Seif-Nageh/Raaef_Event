@@ -44,21 +44,10 @@ class RegisteredUserController extends Controller
             'type' => $request->type
         ]);
 
-        event(new Registered($user));
 
-        Auth::login($user);
+        // event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+
+        return redirect('dashboard');
     }
-
-
-    // public function isAdmin($value)
-    // {
-    //     if ($value === 0) {
-
-    //         return redirect(RouteServiceProvider::HOME);
-    //     } else {
-    //         return redirect('/');
-    //     }
-    // }
 }

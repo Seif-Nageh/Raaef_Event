@@ -25,6 +25,7 @@ class User extends Authenticatable
         'branch'
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,9 +49,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Client::class, 'add_by');
     }
-
-
-    // return $this->hasMany(Comment::class, 'foreign_key');
-
-    // return $this->hasMany(Comment::class, 'foreign_key', 'local_key');
 }
