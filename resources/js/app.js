@@ -4,12 +4,6 @@ import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
 
-import ConfettiGenerator from "confetti-js";
-
-var confettiSettings = { target: "my-canvas", rotate: true, max: 400 };
-var confetti = new ConfettiGenerator(confettiSettings);
-confetti.render();
-
 
 Alpine.store("data", {
     gift: "",
@@ -32,5 +26,11 @@ Alpine.store("data", {
 
 Alpine.start();
 
+
+import ConfettiGenerator from "confetti-js";
+
+var confettiSettings = { target: "my-canvas", rotate: true, max: 400 };
+var confetti = new ConfettiGenerator(confettiSettings);
+confetti.render();
 
 

@@ -15,31 +15,37 @@ class ClientController extends Controller
     {
 
 
+        // dd($request);
 
         //validation
         $request->validate([
             'name' => 'required|max:255',
             'phone' => 'required|unique:clients,phone',
             'email' => 'max:255',
-            'city' => 'max:100',
-            'state' => 'max:100',
+            'state' => 'required',
+            'city' => 'required',
+            'second_phone' => 'unique:clients,phone',
+            'address' => 'max:255',
+            'category' => 'required',
+            'type' => 'required',
+            'company_name' => 'max:255',
+
         ]);
 
-        // dd($request);
         $user = $request->user();
         $client = $user->clients()->create($request->only([
             'name',
             'phone',
             'email',
-            'city',
             'state',
-            // 'add_by' => $user->id
+            'city',
+            'second_phone',
+            'address',
+            'category',
+            'type',
+            'company_name',
+
         ]));
-
-
-
-
-
         return redirect('/qr');
     }
 

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Models\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +24,28 @@ use App\Http\Controllers\ProfileController;
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('home');
 
     Route::post("/", [ClientController::class, "store"]);
     Route::get("/qr", [ClientController::class, "qr"]);
     Route::get("/surprise-wheel", [ClientController::class, "surprise_wheel"]);
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', function () {
+
+
+
+
+
+            $clients = Client::with("addBy")->get();
+            // $clients = Client::all();
+            // return $clients;
+            return view('dashboard', compact('clients'));
+        })->name('dashboard');
+    });
+
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
