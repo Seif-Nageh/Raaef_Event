@@ -13,7 +13,7 @@
                         <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                             <div class="inline-block min-w-full ">
                                 <div class="overflow-hidden">
-                                    <table class="min-w-full">
+                                    <table class="min-w-full truncate">
                                         <thead class="bg-gray-200 border-b">
                                             <tr>
                                                 <th scope="col"
@@ -34,6 +34,10 @@
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                    Second Phone
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                     Email
                                                 </th>
                                                 <th scope="col"
@@ -43,10 +47,6 @@
                                                 <th scope="col"
                                                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                     City
-                                                </th>
-                                                <th scope="col"
-                                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                    Second Phone
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -79,8 +79,8 @@
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $client->add_by }}
-                                                        {{-- {{ DB::table('users')->get()->where($client->add_by) }} --}}
+                                                        {{ $client->addBy->name }}
+
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -89,6 +89,10 @@
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $client->phone }}
+                                                    </td>
+                                                    <td
+                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        {{ $client->second_phone }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -101,10 +105,6 @@
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $client->city }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $client->second_phone }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

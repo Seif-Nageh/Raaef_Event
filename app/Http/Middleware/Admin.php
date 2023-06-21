@@ -18,7 +18,7 @@ class Admin
     {
 
         // dd(Auth::user());
-        if (Auth::user()->type == 1) {
+        if (Auth::user()->type == "1") {
 
             return $next($request);
         }
