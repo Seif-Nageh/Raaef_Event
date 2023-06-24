@@ -33,14 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', function () {
-
-
-
-
-
             $clients = Client::with("addBy")->get();
-            // $clients = Client::all();
-            // return $clients;
             return view('dashboard', compact('clients'));
         })->name('dashboard');
     });

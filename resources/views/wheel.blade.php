@@ -3,7 +3,7 @@
         class="top-0 left-0 bg-[#ffffffe1] absolute z-50 h-screen w-screen hidden opacity-0 transition-all duration-1000"
         x-data>
         <canvas id="my-canvas" class="absolute h-screen w-screen"></canvas>
-        <div class="absolute left-1/2 top-1/2 -translate-y-1/2">
+        <div class="absolute left-1/2 top-1/2 -translate-y-1/2 text-end">
             <div class="relative -left-1/2 -top-1/2 w-full h-full text-center bg-white">
                 <p class="w-full h-full text-2xl text-red-500">CONGRATULATIONS! YOU WIN</p>
                 <p class="w-full h-full font-black text-5xl" x-text="$store.data.gift"></p>
@@ -14,7 +14,7 @@
             <a class="mt-auto" href="/">Go Home</a>
         </div>
     </div>
-    <p class="text-2xl">Raaef Wheel</p>
+    <p class="text-2xl">Raif Wheel</p>
     <p class="text-4xl text-[#d0b246] pb-8">Press to Win</p>
     <div class="relative w-60 h-60 mt-28 md:mt-0" x-data>
         <div class="absolute w-60 h-60">
