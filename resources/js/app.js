@@ -1,9 +1,8 @@
-import './bootstrap';
+import "./bootstrap";
 
-import Alpine from 'alpinejs';
+import Alpine from "alpinejs";
 
 window.Alpine = Alpine;
-
 
 Alpine.store("data", {
     gift: "",
@@ -26,11 +25,8 @@ Alpine.store("data", {
 
 Alpine.start();
 
-
 import ConfettiGenerator from "confetti-js";
 
-var confettiSettings = { target: "my-canvas", rotate: true, max: 400 };
-var confetti = new ConfettiGenerator(confettiSettings);
+let confettiSettings = { target: "my-canvas", rotate: true, max: 400 };
+let confetti = new ConfettiGenerator(confettiSettings);
 confetti.render();
-
-

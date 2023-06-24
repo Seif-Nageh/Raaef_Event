@@ -1,6 +1,5 @@
 <x-client-layout>
-    <form class="w-full max-w-lg bg-white shadow-md shadow-gray-300 rounded-md p-6" method="POST" x-data="data"
-        x-effect="console.log(selectedTypes)">
+    <form class="w-full max-w-lg bg-white shadow-md shadow-gray-300 rounded-md p-6" method="POST" x-data="data">
         @csrf
         <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 px-3  mb-3">
@@ -53,11 +52,12 @@
                     for="state">المحافظة</label>
                 <select id="state"
                     class="appearance-none bg-left block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
-                    name="state">
-                    <option disabled></option>
-                    <option selected value="القاهره">القاهره</option>
-                    <option value="اسكندريه">اسكندريه</option>
-                    <option value="القليوبيه">القليوبيه</option>
+                    name="state" @change="getArea(event.target.value)">
+                    <option disabled>أختر المحافظة</option>
+                    <template x-for="(state, index) in governorates" :key="state.name">
+                        <option :selected="'{{ old('state') }}' == state.name || index == 0" :value="state.name"
+                            x-text="state.name"></option>
+                    </template>
                 </select>
 
 
@@ -70,11 +70,7 @@
                 <select id="city"
                     class="appearance-none bg-left block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
                     name="city">
-                    <option disabled></option>
-                    <option selected value="مصر الجديدة">مصر الجديده</option>
-                    <option value="نزهه">نزهه</option>
-                    <option value="ميامى">ميامى</option>
-                    <option value="بحرى">بحرى</option>
+                    <option disabled>أختر المنطقة</option>
                 </select>
 
 
@@ -103,7 +99,7 @@
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold">الفئة</label>
                 <select id="category"
                     class="appearance-none bg-left block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
-                    name="category" @change="getType(event)">
+                    name="category" @change="getType(event.target.value)">
                     <option disabled>اختر فئة العميل</option>
                     <template x-for="(category, index) in categories" :key="category.title">
                         <option :selected="'{{ old('category') }}' == category.title || index == 0"
@@ -119,7 +115,7 @@
                     class="appearance-none bg-left block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
                     name="type">
                     <option disabled>أختر نوع العميل</option>
-                    <option selected value="زبون بيت">زبون بيت</option>
+                    {{-- <option selected value="زبون بيت">زبون بيت</option> --}}
 
                 </select>
                 <x-input-error :messages="$errors->get('type')" class="mt-2" />
@@ -157,26 +153,218 @@
                 title: 'مشروعات',
                 types: ['معرض اثاث', 'مصنع اثاث', 'منجد', 'مهندس ديكور']
             }],
-            selectedTypes: []
+            governorates: [{
+                    name: 'القاهرة',
+                    areas: [
+                        'المعادي',
+                        'حلوان',
+                        'الزمالك',
+                        'المهندسين',
+                        'الدقي',
+                        'العجوزة',
+                        'الجيزة',
+                        'مدينة نصر',
+                        'مصر الجديدة',
+                        'التجمع الخامس',
+                        'الشيخ زايد',
+                        'الهرم',
+                        'العباسية',
+                        'الساحل الشمالي',
+                        'شبرا',
+                        'روض الفرج',
+                        'مدينة الشروق',
+                        'المرج',
+                        'عين شمس',
+                        'حدائق القبة',
+                        'المطرية',
+                        'الزيتون',
+                        'الوايلي',
+                        'مصر القديمة',
+                        'بولاق',
+                        'منشأة ناصر',
+                        'البساتين',
+                        'الشرابية',
+                        'دار السلام',
+                        'القليوبية'
+                    ]
+                },
+                {
+                    name: 'الجيزة',
+                    areas: [
+                        'الهرم',
+                        'العجوزة',
+                        'الدقي',
+                        'الدوراني',
+                        'الوراق',
+                        'أكتوبر',
+                        'الشيخ زايد',
+                        'البدرشين',
+                        'صفط اللبن',
+                        'العياط',
+                        'الصف',
+                        'الحوامدية',
+                        'العشراوي',
+                        'المنيب',
+                        'الجمالية',
+                        'الحرفيين',
+                        'كرداسة',
+                        'أبو النمرس',
+                        'بولاق الدكرور',
+                        'العمرانية',
+                        'الصفا والمروة',
+                        'البيت الوطني',
+                        'منشأة القناطر',
+                        'منشأة الكرامة',
+                        'الباويطي',
+                        'أطفيح',
+                        'أبو رواش'
+                    ]
+                },
+                {
+                    name: 'الإسكندرية',
+                    areas: [
+                        'محرم بك',
+                        'العطارين',
+                        'السيوف',
+                        'كليوباترا',
+                        'فلمنج',
+                        'الشاطبي',
+                        'أبيس',
+                        'المنتزه',
+                        'العصافرة',
+                        'اللبان',
+                        'السانت تريز',
+                        'سموحة',
+                        'الرمل',
+                        'سبورتنج',
+                        'العجمي',
+                        'ميامي',
+                        'المندرة',
+                        'المعمورة',
+                        'الشاطبي',
+                        'سيدي جابر',
+                        'الإبراهيمية',
+                        'برج العرب'
+                    ]
+                },
+                {
+                    name: 'الشرقية',
+                    areas: ['الزقازيق', 'بلبيس', 'العاشر من رمضان', 'منيا القمح', 'أبو حماد']
+                },
+                {
+                    name: 'القليوبية',
+                    areas: ['بنها', 'قليوب', 'شبرا الخيمة', 'القناطر الخيرية', 'الخانكة']
+                },
+                {
+                    name: 'الغربية',
+                    areas: ['طنطا', 'المحلة الكبرى', 'كفر الزيات', 'زفتى', 'السنطة']
+                },
+                {
+                    name: 'المنوفية',
+                    areas: ['شبين الكوم', 'مدينة السادات', 'منوف', 'سرس الليان', 'تلا']
+                },
+                {
+                    name: 'الدقهلية',
+                    areas: ['المنصورة', 'طلخا', 'المطرية', 'أجا', 'منية النصر']
+                },
+                {
+                    name: 'كفر الشيخ',
+                    areas: ['كفر الشيخ', 'دسوق', 'كوم حمادة', 'بلطيم', 'سيدي سالم']
+                },
+                {
+                    name: 'المنيا',
+                    areas: ['المنيا', 'المنيا الجديدة', 'أبو قرقاص', 'مطاي', 'ملوي']
+                },
+                {
+                    name: 'أسيوط',
+                    areas: ['أسيوط', 'أسيوط الجديدة', 'ديروط', 'منفلوط', 'أبنوب']
+                },
+                {
+                    name: 'سوهاج',
+                    areas: ['سوهاج', 'سوهاج الجديدة', 'أخميم', 'أخميم الجديدة', 'البلينا']
+                },
+                {
+                    name: 'قنا',
+                    areas: ['قنا', 'قنا الجديدة', 'أبو تشت', 'نجع حمادي', 'دشنا']
+                },
+                {
+                    name: 'الأقصر',
+                    areas: ['الأقصر', 'الأقصر الجديدة', 'الأقصر الغربية', 'العديسات', 'أرمنت']
+                },
+                {
+                    name: 'أسوان',
+                    areas: ['أسوان', 'أسوان الجديدة', 'دراو', 'كوم أمبو', 'نصر النوبة']
+                },
+                {
+                    name: 'البحر الأحمر',
+                    areas: ['الغردقة', 'مرسى علم', 'القصير', 'سفاجا', 'رأس غارب']
+                },
+                {
+                    name: 'السويس',
+                    areas: ['السويس', 'العين السخنة', 'الجناين', 'العتبة', 'الزيتيات']
+                },
+                {
+                    name: 'مطروح',
+                    areas: ['مرسى مطروح', 'العلمين', 'الحمام', 'الضبعة', 'سيوة']
+                },
+                {
+                    name: 'شمال سيناء',
+                    areas: ['العريش', 'رفح', 'بئر العبد', 'الشيخ زويد', 'نخل']
+                },
+                {
+                    name: 'جنوب سيناء',
+                    areas: ['شرم الشيخ', 'دهب', 'نويبع', 'طابا', 'سانت كاترين']
+                },
+                {
+                    name: 'بني سويف',
+                    areas: ['بني سويف', 'بني سويف الجديدة', 'الواسطى', 'ناصر', 'إهناسيا']
+                },
+                {
+                    name: 'الفيوم',
+                    areas: ['الفيوم', 'الفيوم الجديدة', 'طامية', 'سنورس', 'إطسا']
+                },
+            ],
         }
 
         function getType(e) {
+            // let typeData = "";
+            let typeData = `<option disabled selected>أختر نوع العميل</option>`;
             data.categories.forEach(category => {
-                if (category.title == e.target.value) {
-                    data.selectedTypes = category.types
+                if (category.title == e) {
+                    category.types.forEach((type, index) => {
+                        if (index == 0)
+                            typeData += `<option selected value='${type}'>${type}</option>`
+                        else
+                            typeData += `<option value='${type}'>${type}</option>`
+                    })
                 }
-                if (e.target.value != "قطاعي") document.getElementById("company_name_div").classList.remove(
+                if (e != "قطاعي") document.getElementById("company_name_div").classList.remove(
                     "hidden")
                 else document.getElementById("company_name_div").classList.add(
                     "hidden")
             });
-            // let typeData = `<option disabled selected>أختر نوع العميل</option>`;
-            let typeData = "";
-            data.selectedTypes.forEach((selectedType) => {
-                typeData += `<option value='${selectedType}'>${selectedType}</option>`
-            })
             document.getElementById("type").innerHTML = typeData;
         }
+
+        function getArea(e) {
+            // let typeData = "";
+            let typeData = `<option disabled selected>أختر المنطقة</option>`;
+            data.governorates.forEach(governorate => {
+                if (governorate.name == e) {
+                    governorate.areas.forEach((area, index) => {
+                        if (index == 0)
+                            typeData += `<option selected value='${area}'>${area}</option>`
+                        else
+                            typeData += `<option value='${area}'>${area}</option>`
+                    })
+                }
+            });
+            document.getElementById("city").innerHTML = typeData;
+        }
+        window.addEventListener("load", () => {
+            getType(document.getElementById("category").value);
+            getArea(document.getElementById("state").value);
+        });
     </script>
 
 </x-client-layout>
