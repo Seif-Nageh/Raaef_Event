@@ -27,6 +27,7 @@ class ClientController extends Controller
             'second_phone' => 'unique:clients,phone',
             'address' => 'max:255',
             'category' => 'required',
+            'gender' => 'required',
             'type' => 'required',
             'company_name' => 'max:255',
 
@@ -41,6 +42,7 @@ class ClientController extends Controller
             'city',
             'second_phone',
             'address',
+            'gender',
             'category',
             'type',
             'company_name',

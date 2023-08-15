@@ -17,6 +17,7 @@ class Client extends Model
         'state',
         'city',
         'address',
+        'gender',
         'category',
         'type',
         'company_name',

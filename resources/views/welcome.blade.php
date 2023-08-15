@@ -3,12 +3,26 @@
         @csrf
         <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 px-3  mb-3">
+
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="name">
                     الاسم
                 </label>
-                <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-                    name="name" value="{{ old('name') }}" id="name" type="text" placeholder="اسم العميل">
+                <div class="w-full flex">
+
+                    <select id="gender"
+                        class="appearance-none bg-left h-full w-1/4 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:border-gray-500"
+                        name="gender">
+                        <option disabled>اختر جنس العميل</option>
+                        <option selected>MR</option>
+                        <option>Mis</option>
+
+                    </select>
+                    <input
+                        class="appearance-none w-3/4 bg-gray-200 mr-2 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
+                        name="name" value="{{ old('name') }}" id="name" type="text"
+                        placeholder="اسم العميل">
+                </div>
+                <x-input-error :messages="$errors->get('gender')" class="mt-2" />
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
             <div class="w-full md:w-1/2 px-3  mb-3">
@@ -79,19 +93,6 @@
         </div>
 
 
-        <div class="flex flex-wrap -mx-3">
-            <div class="w-full px-3  mt-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="address">
-                    العنوان بالتفصيل
-                </label>
-                <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
-                    name="address" value="{{ old('address') }}" id="address" type="text"
-                    placeholder="رقم / شارع / علامة">
-                <x-input-error :messages="$errors->get('address')" class="mt-2" />
-            </div>
-        </div>
-
         {{-- Select --}}
         <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 px-3  mt-3">
@@ -135,6 +136,19 @@
             </div>
         </div>
 
+
+        <div class="flex flex-wrap -mx-3 hidden" id="company_address_div">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="address">
+                    العنوان بالتفصيل
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
+                    name="address" value="{{ old('address') }}" id="address" type="text"
+                    placeholder="رقم / شارع / علامة">
+                <x-input-error :messages="$errors->get('address')" class="mt-2" />
+            </div>
+        </div>
 
         <x-primary-button class="text-lg  mt-6" type='submit'>
             {{ __('حفظ') }}
@@ -338,10 +352,18 @@
                             typeData += `<option value='${type}'>${type}</option>`
                     })
                 }
-                if (e != "قطاعي") document.getElementById("company_name_div").classList.remove(
-                    "hidden")
-                else document.getElementById("company_name_div").classList.add(
-                    "hidden")
+                if (e != "قطاعي") {
+                    document.getElementById("company_name_div").classList.remove(
+                        "hidden")
+                    document.getElementById("company_address_div").classList.remove(
+                        "hidden")
+                } else {
+                    document.getElementById("company_name_div").classList.add(
+                        "hidden")
+
+                    document.getElementById("company_address_div").classList.add(
+                        "hidden")
+                }
             });
             document.getElementById("type").innerHTML = typeData;
         }
